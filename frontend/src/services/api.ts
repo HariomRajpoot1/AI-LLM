@@ -1,7 +1,11 @@
-const API_URL = 'http://localhost:3000/chat'
+const configuredApiUrl = import.meta.env.VITE_API_URL?.trim()
+const apiBaseUrl =
+  configuredApiUrl ?? (import.meta.env.DEV ? 'http://localhost:3000' : '')
+const API_URL = `${apiBaseUrl}/chat`
 
 type ChatApiResponse = {
   reply?: string
+  error?: string
 }
 
 export async function sendMessageToAI(message: string): Promise<string> {
@@ -13,11 +17,14 @@ export async function sendMessageToAI(message: string): Promise<string> {
     body: JSON.stringify({ message }),
   })
 
-  if (!response.ok) {
-    throw new Error('The chat service is unavailable right now. Please try again.')
-  }
-
   const data = (await response.json()) as ChatApiResponse
+
+  if (!response.ok) {
+    throw new Error(
+      data.error ??
+        'The chat service is unavailable right now. Please try again.',
+    )
+  }
 
   if (!data.reply || typeof data.reply !== 'string') {
     throw new Error('The chat service returned an invalid response.')
