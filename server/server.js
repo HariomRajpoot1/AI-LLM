@@ -1,4 +1,4 @@
-import express, { response } from 'express'
+import express from 'express'
 import dotenv from 'dotenv'
 import OpenAI from 'openai'
 import cors from 'cors'
@@ -14,7 +14,7 @@ const client = new OpenAI({
     apiKey: process.env.OPENROUTER_API_KEY,
     baseURL: "https://openrouter.ai/api/v1",
     defaultHeaders: {
-        "HTTP-Referer": "http://localhost:3000",
+        "HTTP-Referer": "http://56.228.22.177",
         "X-Title": "My App"
     }
 })
