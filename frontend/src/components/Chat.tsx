@@ -12,7 +12,7 @@ type ChatMessage = {
 }
 
 const createMessage = (role: ChatRole, text: string): ChatMessage => ({
-  id: `${role}-${crypto.randomUUID()}`,
+  id: `${role}-${Date.now().toString()}`,
   role,
   text,
 })
