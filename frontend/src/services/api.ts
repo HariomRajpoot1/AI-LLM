@@ -1,6 +1,4 @@
-const configuredApiUrl = import.meta.env.VITE_API_URL?.trim()
-const apiBaseUrl =
-  configuredApiUrl ?? (import.meta.env.DEV ? 'http://localhost:3000' : '')
+const apiBaseUrl = import.meta.env.VITE_API_URL
 const API_URL = `${apiBaseUrl}/chat`
 
 type ChatApiResponse = {
