@@ -73,7 +73,7 @@ function Chat() {
     <section className="chat" aria-label="AI chat interface">
       <header className="chat__header">
         <div>
-          <p className="chat__eyebrow">AI Assistant</p>
+          <p className="chat__eyebrow">AI Assistant , co-powered by Hariom</p>
           <h1 className="chat__title">Clean frontend chat experience</h1>
         </div>
         <p className="chat__subtitle">
