@@ -61,7 +61,32 @@ app.post("/chat", async(req, res) => {
     }
 })
 
+process.on("uncaughtException", (err) => {
+  console.error("uncaughtException:", err);
+});
 
-app.listen(PORT, "0.0.0.0", () => {
+process.on("unhandledRejection", (reason) => {
+  console.error("unhandledRejection:", reason);
+});
+
+process.on("SIGINT", () => {
+  console.log("Received SIGINT, shutting down");
+  server.close(() => process.exit(0));
+});
+
+process.on("SIGTERM", () => {
+  console.log("Received SIGTERM, shutting down");
+  server.close(() => process.exit(0));
+});
+
+const server = app.listen(PORT, "0.0.0.0", () => {
   console.log(`server running on port ${PORT}`);
+});
+
+server.on("close", () => {
+  console.log("HTTP server closed");
+});
+
+server.on("error", (err) => {
+  console.error("HTTP server error:", err);
 });
