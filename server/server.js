@@ -19,10 +19,6 @@ const client = new OpenAI({
     }
 })
 
-app.listen(3000, "0.0.0.0", () => {
-  console.log("server running");
-});
-
 app.post("/chat", async(req, res) => {
     try {
         const { message } = req.body;
@@ -41,3 +37,8 @@ app.post("/chat", async(req, res) => {
         console.log('err==', err)
     }
 })
+
+
+app.listen(3000, "0.0.0.0", () => {
+  console.log("server running");
+});
